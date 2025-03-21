@@ -1,10 +1,11 @@
+#include <QApplication>
 #include "scannerstab.h"
-#include <QtWidgets/QApplication>
 
-int main(int argc, char *argv[])
-{
-    QApplication a(argc, argv);
-    scannerstab w;
-    w.show();
-    return a.exec();
+int main(int argc, char* argv[]) {
+    QApplication app(argc, argv);
+
+    scannerstab scanner;
+    scanner.show();
+
+    return app.exec();
 }

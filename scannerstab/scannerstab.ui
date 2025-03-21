@@ -14,27 +14,7 @@
    <string>scannerstab</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QTextEdit" name="textEdit">
-    <property name="geometry">
-     <rect>
-      <x>80</x>
-      <y>40</y>
-      <width>230</width>
-      <height>500</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="textEdit_2">
-    <property name="geometry">
-     <rect>
-      <x>390</x>
-      <y>40</y>
-      <width>230</width>
-      <height>500</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="leftFootLabel">
     <property name="geometry">
      <rect>
       <x>130</x>
@@ -47,7 +27,7 @@
      <string>Skan lewej stopy</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="rightFootLabel">
     <property name="geometry">
      <rect>
       <x>430</x>
@@ -58,6 +38,26 @@
     </property>
     <property name="text">
      <string>Skan prawej stopy</string>
+    </property>
+   </widget>
+   <widget class="Custom_View" name="graphicsView">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>40</y>
+      <width>230</width>
+      <height>500</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QGraphicsView" name="graphicsView_2">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>40</y>
+      <width>230</width>
+      <height>500</height>
+     </rect>
     </property>
    </widget>
   </widget>
@@ -82,6 +82,13 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>Custom_View</class>
+   <extends>QGraphicsView</extends>
+   <header location="global">events.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="scannerstab.qrc"/>
  </resources>
