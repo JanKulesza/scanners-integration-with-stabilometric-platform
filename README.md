@@ -1,6 +1,6 @@
 # Stabilometric Platform - Scanners Integration Application
 
-...
+This custom-built extension integrates the existing mass tracking application with 2D foot scanners. Developed per client request, it allows seamless image import, detection, and analysis of scanned feet. The module automatically calculates the bounding area for each foot, accounts for precise physical spacing between scans, and delivers accurate measurements to support mass distribution analysis and reporting.
 
 ## Features
 
