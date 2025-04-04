@@ -2,14 +2,20 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_scannerstab.h"
+#include <QPixmap>
 
 class scannerstab : public QMainWindow {
     Q_OBJECT
 
 public:
-    scannerstab(QMainWindow* parent = nullptr);
+    explicit scannerstab(QWidget* parent = nullptr);
     ~scannerstab();
 
 private:
-    Ui::scannerstab ui; // UI object
+    Ui::scannerstab ui; 
+
+    QPixmap leftPixmap;  // Left foot scan
+    QPixmap rightPixmap;   // Right foot scan
+
+    void computeAndDisplayArea();
 };

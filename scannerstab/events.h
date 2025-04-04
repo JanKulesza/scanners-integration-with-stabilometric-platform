@@ -10,18 +10,17 @@
 #include <QWidget>
 #include <QMimeData>
 #include <QGraphicsPixmapItem>
-
-class Events
-{
-public:
-    Events();
-};
+#include <QUrl>
+#include <QPixmap>
 
 class Custom_View : public QGraphicsView
 {
     Q_OBJECT
 public:
-    explicit Custom_View(QWidget* parent = nullptr); // Default argument here
+    explicit Custom_View(QWidget* parent = nullptr);
+
+signals:
+    void footDropped(const QPixmap& pix);
 
 protected:
     void dragEnterEvent(QDragEnterEvent* event) override;
