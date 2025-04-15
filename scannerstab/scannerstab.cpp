@@ -22,8 +22,6 @@ static QRect boundingRectOfFoot(const QPixmap& pix, WhichFoot whichFoot )
         return QRect();
 
     // TODO: Improve getting foot color
-    int cx = img.width() / 2;
-    int cy = img.height() / 2;
     QColor refColor("#cdb0a0");
 
     int thresholdDiff = 25; // adjust if needed
@@ -97,9 +95,9 @@ void scannerstab::computeAndDisplayArea()
     qDebug() << "Lewy bounding rect:" << rectLeft;
     qDebug() << "Prawy bounding rect:" << rectRight;
 
-    // --- Scanner settings and conversion factors ---
+    // Scanner settings
     int dpi = 300;             // Scanner optical resolution (pixels per inch)
-    double gapCm = 2.0;         // Desired gap between feet in centimeters (corrected to 2 cm)
+    double gapCm = 3.0;         // Desired gap between scanners
     double inchInCm = 2.54;     // 1 inch = 2.54 cm
 
     // Convert gap (in cm) to pixels:
@@ -107,20 +105,20 @@ void scannerstab::computeAndDisplayArea()
     int gapPx = static_cast<int>((gapCm / inchInCm) * dpi + 0.5);
     qDebug() << "Gap (in pixels) corresponding to" << gapCm << "cm:" << gapPx;
 
-    // --- Position right foot relative to left foot ---
+    // Position right foot relative to left foot
     // Shift the right rectangle to the right by the width of the left rectangle plus the gap
     QRect shiftedRight = rectRight.translated(rectLeft.width() + gapPx, 0);
 
     // Get the bounding rectangle that covers both the left foot and the shifted right foot
     QRect combined = rectLeft.united(shiftedRight);
 
-    // --- Calculate areas in pixels ---
+    // Calculate areas in pixels
     double areaLeftPx = rectLeft.width() * rectLeft.height();
     double areaRightPx = rectRight.width() * rectRight.height();
-    // Instead of summing individual areas and adding a length (gapPx), use the union's area:
+    // Instead of summing individual areas and adding a length (gapPx), use the union's area
     double areaCombinedPx = combined.width() * combined.height();
 
-    // --- Convert pixel area to square centimeters ---
+    // Convert pixel area to square centimeters
     // One pixel corresponds to (2.54 / dpi) centimeters, so for area:
     double cmPerPx = inchInCm / dpi;  // cm per pixel
     double px2ToCm2 = cmPerPx * cmPerPx;  // conversion factor from px² to cm²
@@ -132,13 +130,13 @@ void scannerstab::computeAndDisplayArea()
     qDebug() << "Combined bounding rect:" << combined << "Area (px²):" << areaCombinedPx;
     qDebug() << "Lewy:" << areaLeftCm2 << "cm², Prawy:" << areaRightCm2 << "cm², Razem:" << areaCombinedCm2 << "cm²";
 
-    // --- Update UI label ---
+    // Update UI label
     ui.label->setText(QString("Lewy: %1 cm², Prawy: %2 cm², Razem: %3 cm²")
         .arg(areaLeftCm2, 0, 'f', 2)
         .arg(areaRightCm2, 0, 'f', 2)
         .arg(areaCombinedCm2, 0, 'f', 2));
 
-    // --- Draw bounding rectangles on the images ---
+    // Draw bounding rectangles on the images
     if (!leftPixmap.isNull())
     {
         QPixmap leftWithRect = leftPixmap;

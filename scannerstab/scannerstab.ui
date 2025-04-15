@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Skan lewej stopy</string>
+     <string>Skan prawej stopy</string>
     </property>
    </widget>
    <widget class="QLabel" name="rightFootLabel">
@@ -37,7 +37,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Skan prawej stopy</string>
+     <string>Skan lewej stopy</string>
     </property>
    </widget>
    <widget class="Custom_View" name="graphicsView">

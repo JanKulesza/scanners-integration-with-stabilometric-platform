@@ -29,6 +29,7 @@ protected:
     void dropEvent(QDropEvent* event) override;
 
 private:
+    // name m_scene to not override graphicsView properties
     QGraphicsScene* m_scene;
 };
 
