@@ -5,8 +5,8 @@
 Custom_View::Custom_View(QWidget* parent) : QGraphicsView(parent)
 {
     setAcceptDrops(true);
-    scene = new QGraphicsScene(this);
-    setScene(scene);
+    m_scene = new QGraphicsScene(this);
+    setScene(m_scene);
 }
 
 void Custom_View::dragEnterEvent(QDragEnterEvent* event)
@@ -40,14 +40,14 @@ void Custom_View::dropEvent(QDropEvent* event)
                 if (!pixmap.isNull())
                 {
                     // Clear scene before adding next image
-                    scene->clear();
+                    m_scene->clear();
                     QGraphicsPixmapItem* item = new QGraphicsPixmapItem(pixmap);
-                    scene->addItem(item);
+                    m_scene->addItem(item);
 
                     // adjsut aspect ratio
-                    scene->setSceneRect(pixmap.rect());
-                    setSceneRect(scene->sceneRect());
-                    fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
+                    m_scene->setSceneRect(pixmap.rect());
+                    setSceneRect(m_scene->sceneRect());
+                    fitInView(m_scene->sceneRect(), Qt::KeepAspectRatio);
 
                     emit footDropped(pixmap);
                     event->acceptProposedAction();

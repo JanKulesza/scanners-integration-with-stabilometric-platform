@@ -29,7 +29,7 @@ protected:
     void dropEvent(QDropEvent* event) override;
 
 private:
-    QGraphicsScene* scene;
+    QGraphicsScene* m_scene;
 };
 
 #endif // EVENTS_H

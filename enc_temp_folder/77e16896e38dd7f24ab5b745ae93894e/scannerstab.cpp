@@ -98,7 +98,7 @@ void scannerstab::computeAndDisplayArea()
     qDebug() << "Prawy bounding rect:" << rectRight;
 
     // --- Scanner settings and conversion factors ---
-    int dpi = 300;             // Scanner optical resolution (pixels per inch)
+    int dpi = 2400;             // Scanner optical resolution (pixels per inch)
     double gapCm = 2.0;         // Desired gap between feet in centimeters (corrected to 2 cm)
     double inchInCm = 2.54;     // 1 inch = 2.54 cm
 
