@@ -1,20 +1,17 @@
 #include "events.h"
+#include <QUrl>
+#include <QDebug>
 
-Events::Events()
-{
-}
-
-Custom_View::Custom_View(QWidget* parent) : QGraphicsView(parent) // No default argument here
+Custom_View::Custom_View(QWidget* parent) : QGraphicsView(parent)
 {
     setAcceptDrops(true);
-    scene = new QGraphicsScene(this);
-    setScene(scene);
+    m_scene = new QGraphicsScene(this);
+    setScene(m_scene);
 }
 
 void Custom_View::dragEnterEvent(QDragEnterEvent* event)
 {
-    if (event->mimeData()->hasUrls())
-    {
+    if (event->mimeData()->hasUrls()) {
         event->acceptProposedAction();
     }
 }
@@ -32,29 +29,29 @@ void Custom_View::dragMoveEvent(QDragMoveEvent* event)
 
 void Custom_View::dropEvent(QDropEvent* event)
 {
-    if (event->source() == this) return;
-
-    if (event->mimeData()->hasUrls())
-    {
-        QList<QUrl> urllist = event->mimeData()->urls();
-        foreach(QUrl url, urllist)
+    if (event->mimeData()->hasUrls()) {
+        QList<QUrl> urlList = event->mimeData()->urls();
+        for (const QUrl& url : urlList)
         {
             if (url.isLocalFile())
             {
-                QString FilePath = url.toLocalFile();
-                QPixmap pixmap(FilePath);
+                QString filePath = url.toLocalFile();
+                QPixmap pixmap(filePath);
                 if (!pixmap.isNull())
                 {
-                    if (scene->items().count() > 0) scene->clear(); // Clear scene when dropping a new image file
-
+                    // Clear scene before adding next image
+                    m_scene->clear();
                     QGraphicsPixmapItem* item = new QGraphicsPixmapItem(pixmap);
+                    m_scene->addItem(item);
 
-                    scene->setSceneRect(pixmap.rect());
-                    setSceneRect(scene->sceneRect());
-                    fitInView(scene->sceneRect(), Qt::KeepAspectRatio); // Fit image in GraphicsView
+                    // adjsut aspect ratio
+                    m_scene->setSceneRect(pixmap.rect());
+                    setSceneRect(m_scene->sceneRect());
+                    fitInView(m_scene->sceneRect(), Qt::KeepAspectRatio);
 
-                    scene->addItem(item);
+                    emit footDropped(pixmap);
                     event->acceptProposedAction();
+                    return;
                 }
             }
         }

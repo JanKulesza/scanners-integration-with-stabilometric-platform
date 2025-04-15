@@ -32,15 +32,15 @@
     <QtMoc Include="scannerstab.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <ClCompile Include="scannerstab.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="events.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scannerstab.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
